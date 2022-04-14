@@ -63,8 +63,8 @@ public class AccountController {
                 userInfo.setPassword(password);
         	    usersService.registUser(userInfo);
         		   
-        	    model.addAttribute("bookList", booksService.getBookList());
-        	    return "rogin";
+        	    model.addAttribute("bookList");
+        	    return "login";
         		   
             } else {
         		  
