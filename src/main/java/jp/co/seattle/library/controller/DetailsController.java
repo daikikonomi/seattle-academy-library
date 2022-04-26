@@ -35,6 +35,7 @@ public class DetailsController {
     @RequestMapping(value = "/details", method = RequestMethod.POST)
     public String detailsBook(Locale locale,
             @RequestParam("bookId") Integer bookId,
+            
             Model model) {
         // デバッグ用ログ
         logger.info("Welcome detailsControler.java! The client locale is {}.", locale);

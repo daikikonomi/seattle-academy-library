@@ -55,11 +55,15 @@ public class BooksService {
         return bookDetailsInfo;
     }
 
-    //最新の情報を取得する
+    /**
+     * 最新の書籍情報を取得する
+     *
+     * @return 最新書籍情報
+     */
     public BookDetailsInfo getLatestBookInfo() {
 
      
-    	String sql = "SELECT * FROM books ORDER BY upd_date DESC LIMIT 1";
+    	String sql = "SELECT * FROM books where id = (select max (id) from books);";
                 
 
         BookDetailsInfo latestBookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
@@ -81,7 +85,6 @@ public class BooksService {
                 + bookInfo.getThumbnailUrl() + "',"
                 + "now(),"
                 + "now(),'"
-                //タスク5
                 + bookInfo.getPublish_date() + "','"
                 + bookInfo.getIsbn() + "','"
                 + bookInfo.getExplanation() + "')" ;

@@ -119,22 +119,8 @@ public class AddBooksController {
         
         }else {
         	model.addAttribute("errorMessages", list);
-        	System.out.println(list);
         	return "addBook";
         }
-        
-        
-        
-
-        // 書籍情報を新規登録する  
-        
-        
-        
-        // TODO 登録した書籍の詳細情報を表示するように実装
-        
-        
-        
-        //  詳細画面に遷移する
        
     }
 

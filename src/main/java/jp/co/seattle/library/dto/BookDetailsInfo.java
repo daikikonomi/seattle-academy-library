@@ -19,13 +19,13 @@ public class BookDetailsInfo {
     private String author;
 
     private String publisher;
-    //タスク5  
+    
     private String publish_date;
     
     private String isbn;
     
     private String explanation;
-    //
+    
     private String thumbnailUrl;
 
     private String thumbnailName;
@@ -41,11 +41,9 @@ public class BookDetailsInfo {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
-        //タスク5
         this.publish_date = publish_date;
         this.isbn = isbn;
         this.explanation = explanation;
-        //
         this.thumbnailUrl = thumbnailUrl;
         this.thumbnailName = thumbnailName;
     }
