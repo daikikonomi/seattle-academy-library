@@ -109,6 +109,18 @@ public class BooksService {
     }
     
 
+    /**
+     * 書籍を編集する
+     * 
+     */
+    public void editbook(BookDetailsInfo bookInfo) {
     	
+    	String sql = "UPDATE books SET title = '" + bookInfo.getTitle() + "'"
+    			+ "author = '" + bookInfo.getAuthor() + "',"
+    			+ "publisher = '" + bookInfo.getPublisher() + "',"
+    			+ "publish_date = '" + bookInfo.getPublish_date() + "',"
+    			+ "where id = " + bookInfo.getBookId() + ";";
+    	
+    }
     
 }
