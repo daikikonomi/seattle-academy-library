@@ -103,7 +103,12 @@ public class BooksService {
     	String sql = "delete from books where id = " + bookId + ";";
     	jdbcTemplate.update(sql);
     	
+    	
+    	
 
     }
+    
+
+    	
     
 }
