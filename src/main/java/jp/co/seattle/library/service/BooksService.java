@@ -113,13 +113,13 @@ public class BooksService {
      * 書籍を編集する
      * 
      */
-    public void editbook(BookDetailsInfo bookInfo) {
+    public void updateBook(BookDetailsInfo bookInfo) {
     	
-    	String sql = "UPDATE books SET title = '" + bookInfo.getTitle() + "'"
-    			+ "author = '" + bookInfo.getAuthor() + "',"
-    			+ "publisher = '" + bookInfo.getPublisher() + "',"
-    			+ "publish_date = '" + bookInfo.getPublish_date() + "',"
-    			+ "where id = " + bookInfo.getBookId() + ";";
+    	String sql = "UPDATE books SET title ='" + bookInfo.getTitle() + "', author = '" + bookInfo.getAuthor() + "', publisher = '" +  bookInfo.getPublisher() 
+    	+ "', publish_date = '" + bookInfo.getPublish_date() + "', thumbnail_url ='" + bookInfo.getThumbnailUrl() + "', isbn ='"  + bookInfo.getIsbn() 
+        + "', upd_date = now(), explanation ='" + bookInfo.getExplanation() + "' Where id = " + bookInfo.getBookId();
+    	
+    	jdbcTemplate.update(sql);
     	
     }
     
