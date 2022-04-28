@@ -50,7 +50,6 @@
                                 <li class="book_author">${bookInfo.author}(著)</li>
                                 <li class="book_publisher">出版社:${bookInfo.publisher}</li>
                                 <li class="book_publish_date">出版日:${bookInfo.publish_date}</li>
-                                
                             </ul>
                         </div>
                     </c:forEach>
