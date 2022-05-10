@@ -45,7 +45,7 @@ public class RentBookController {
     	//本の存在チェック
     	if (count == count2) {
     		
-    		model.addAttribute("errorMessage","貸し出し済みです" );
+    		model.addAttribute("errorMessage","貸出し済みです" );
     		
     	}
     	
