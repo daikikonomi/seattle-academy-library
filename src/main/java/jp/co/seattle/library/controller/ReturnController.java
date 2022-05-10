@@ -16,40 +16,36 @@ import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.RentBookService;
 
 @Controller
-public class RentBookController {
-	final static Logger logger = LoggerFactory.getLogger(RentBookController.class);
+public class ReturnController {
+	final static Logger logger = LoggerFactory.getLogger(ReturnController.class);
 	
 	@Autowired
     private BooksService booksService;
 	
 	@Autowired
     private RentBookService rentBookService;
-
-    //借りる機能の実装
-    @Transactional
-    @RequestMapping(value = "/rentBook", method = RequestMethod.POST)
-    public String rentBook
-    		(Locale locale,
-    		@RequestParam("bookId") int bookId,
-    		Model model) {
-    	
-    	logger.info("Welcome rentBook! The client locale is {}.", locale);
-    	
-    	
-    	int count = rentBookService.getRentBook();
-    	rentBookService.rentBook(bookId);
+	
+	//返却機能の実装 
+	@Transactional
+	@RequestMapping(value = "/returnBook", method = RequestMethod.POST)
+	public String returnBook
+		(Locale locale,
+		@RequestParam("bookId") int bookId,
+		Model model) {
+		 
+		logger.info("Welcome returnBook! The client locale is {}.", locale);
+		
+		int count = rentBookService.getRentBook();
+    	rentBookService.returnBook(bookId);
     	int count2 = rentBookService.getRentBook();
     	
     	//本の存在チェック
     	if (count == count2) {
     		
-    		model.addAttribute("errorMessage","貸出し済みです" );
-    		
+    		model.addAttribute("errorMessage","貸出されていません" );
     	}
-    	
-    	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-    	return "details";
 
-    }
-
+	    model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+	    return "details";
+	 }
 }
