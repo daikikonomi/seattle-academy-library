@@ -13,7 +13,10 @@ public class RentBookService {
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 	
-	
+	/**
+	 * 
+	 * @param bookId
+	 */
 	//booksテーブルから対象の本を取得しrentBooksテーブルに挿入
     public void rentBook(int bookId) {
 
@@ -22,7 +25,10 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
-    
+    /**
+     * 
+     * @return jdbcTemplate.queryForObject
+     */
     //rentbooksテーブルから本を取得しカウントする
     public int getRentBook() {
     	
