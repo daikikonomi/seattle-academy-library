@@ -52,17 +52,34 @@ public class AccountController {
         // デバッグ用ログ
         logger.info("Welcome createAccount! The client locale is {}.", locale);
 
-        // パラメータで受け取った書籍情報をDtoに格納する。
+     // パラメータで受け取った書籍情報をDtoに格納する。
         UserInfo userInfo = new UserInfo();
         userInfo.setEmail(email);
 
         // TODO バリデーションチェック、パスワード一致チェック実装
-
-        userInfo.setPassword(password);
-        usersService.registUser(userInfo);
-
-        model.addAttribute("bookList", booksService.getBookList());
-        return "home";
-    }
+        if (password.length() >= 8 && password.matches("^[0-9a-z-A-Z]+$")) {
+        	
+        	if (password.equals(passwordForCheck)) {
+                userInfo.setPassword(password);
+        	    usersService.registUser(userInfo);
+        		   
+        	    return "login";
+        		   
+            } else {
+        		  
+        	   	model.addAttribute("errorPassword", "パスワードが一致しません。");       
+        	   	return "createAccount";    
+    		   
+            }
+        	
+        } else {
+        
+    	    model.addAttribute("errorPassword", "パスワードは8文字以上かつ半角英数字に設定してください。");
+    	   	return "createAccount";
+        	
+        }
+        	
+     }   	
 
 }
+
