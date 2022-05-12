@@ -28,13 +28,13 @@ public class RentBookController {
     private RentBookService rentBookService;
 
     /**
+     * 借りる機能の実装
      * 
      * @param locale
      * @param bookId
      * @param model
      * @return 詳細画面
      */
-	//借りる機能の実装
     @Transactional
     @RequestMapping(value = "/rentBook", method = RequestMethod.POST)
     public String rentBook
