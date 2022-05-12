@@ -22,7 +22,7 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
-    //booksテーブルから対象の本を取得しrentBooksテーブルに挿入
+    //rentbooksテーブルから対象の本を削除（返却）
     public void returnBook(int bookId) {
 
         String sql = "delete from rentbooks where book_id = " + bookId ;

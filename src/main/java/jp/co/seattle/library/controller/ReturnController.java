@@ -41,7 +41,6 @@ public class ReturnController {
 
     	//本の存在チェック
     	if (count == count2) {
-
     		model.addAttribute("errorMessage","貸出されていません" );
     	}
 
