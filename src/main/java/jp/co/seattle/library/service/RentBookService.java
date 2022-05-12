@@ -13,8 +13,11 @@ public class RentBookService {
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 	
-	
-	//booksテーブルから対象の本を取得しrentBooksテーブルに挿入
+	/**
+	 * booksテーブルから対象の本を取得しrentBooksテーブルに挿入
+	 * 
+	 * @param bookId
+	 */
     public void rentBook(int bookId) {
 
         String sql = "INSERT INTO rentBooks(book_id) SELECT " + bookId + " where not exists (select book_id from rentbooks where book_id = " + bookId + ")";
@@ -22,6 +25,7 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
+
     //rentbooksテーブルから対象の本を削除（返却）
     public void returnBook(int bookId) {
 
@@ -31,7 +35,6 @@ public class RentBookService {
     }
     
     
-    //rentbooksテーブルから本を取得しカウントする
     public int getRentBook() {
     	
     	String sql = "SELECT count (book_id) from rentBooks";
