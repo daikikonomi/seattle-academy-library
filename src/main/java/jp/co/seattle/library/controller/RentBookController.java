@@ -41,12 +41,10 @@ public class RentBookController {
     		Model model) {
     	
     	logger.info("Welcome rentBook! The client locale is {}.", locale);
-    	
+
     	int countBeforeRent = rentBookService.getRentBook();
     	rentBookService.rentBook(bookId);
     	int countAfterRent = rentBookService.getRentBook();
-    	
-    	//本の存在チェック
 
     	if (countBeforeRent == countAfterRent) {
     		
