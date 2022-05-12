@@ -22,6 +22,14 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
+    //booksテーブルから対象の本を取得しrentBooksテーブルに挿入
+    public void returnBook(int bookId) {
+
+        String sql = "delete from rentbooks where book_id = " + bookId ;
+        
+        jdbcTemplate.update(sql);
+    }
+    
     
     //rentbooksテーブルから本を取得しカウントする
     public int getRentBook() {
