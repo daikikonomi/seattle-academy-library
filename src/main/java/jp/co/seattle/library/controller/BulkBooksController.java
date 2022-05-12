@@ -60,17 +60,8 @@ public class BulkBooksController {
 	      //データが無くなるまで、繰り返し実施
 	      while (!StringUtils.isEmpty(line)) {
 	    	
-	        final String[] split = line.split(",",-1);
-
-	        
-	        //値をDtoに保管
-	        final BookDetailsInfo bookInfo = new BookDetailsInfo();
-	        bookInfo.setTitle(split[0]);
-	        bookInfo.setAuthor(split[1]);
-	        bookInfo.setPublisher(split[2]);
-	        bookInfo.setPublish_date(split[3]);
-	        bookInfo.setIsbn(split[4]);	        	        
-	        bookInfo.setExplanation(split[5]);	
+	        String[] split = line.split(",",-1);
+	        BookDetailsInfo bookInfo = new BookDetailsInfo();	        	
 	        
 	        // バリデーションチェック
 	        boolean repuiredCheck = split[0].isEmpty() || split[1].isEmpty() || split[2].isEmpty() || split[3].isEmpty() ;
@@ -80,30 +71,37 @@ public class BulkBooksController {
 	        
 	        if(repuiredCheck || publishDateCheck || isbnCheck ) {
 	        	errorLists.add(count + "行目でエラーが発生しました");
-	        }else {
-	        	bookLists.add(bookInfo);
 	        }
-	        
+	        else {
+	        	//値をDtoに保管
+	        	bookInfo.setTitle(split[0]);
+		        bookInfo.setAuthor(split[1]);
+		        bookInfo.setPublisher(split[2]);
+		        bookInfo.setPublish_date(split[3]);
+		        bookInfo.setIsbn(split[4]);	        	        
+		        bookInfo.setExplanation(split[5]);
+		        bookLists.add(bookInfo);
+	        }
 	        count ++;
-	        line = br.readLine();
-	         
-	      	}if(bookLists.isEmpty()) {
+	        line = br.readLine(); 
+	      }
+	      
+	      	if(bookLists.size() == 0) {
 	      		model.addAttribute("emptyFailuedMessage","CSVに書籍情報がありません。" );
-	      		return "bulkBooks";
+	      		return "bulkBooks";	
 	      	}
 	      
 	    } catch (IOException e) {
 	      throw new RuntimeException("ファイルが読み込めません", e);
 	    }
-		
 		if(errorLists.size() == 0) {
 			for (BookDetailsInfo bookInfo : bookLists) {
 	        	booksService.registBook(bookInfo);
 			}
 			model.addAttribute("bookList", booksService.getBookList());
         	return "home";
-        
-        }else {
+        }
+		else {
         	model.addAttribute("errorMessages", errorLists);
         	return "bulkBooks";
         }

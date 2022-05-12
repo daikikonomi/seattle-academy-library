@@ -35,18 +35,14 @@ public class RentBookController {
     	
     	logger.info("Welcome rentBook! The client locale is {}.", locale);
     	
-    	
     	int count = rentBookService.getRentBook();
     	rentBookService.rentBook(bookId);
     	int count2 = rentBookService.getRentBook();
     	
     	//本の存在チェック
-    	if (count == count2) {
-    		
-    		model.addAttribute("errorMessage","貸出し済みです" );
-    		
+    	if (count == count2) { 		
+    		model.addAttribute("errorMessage","貸出し済みです" );	
     	}
-    	
     	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
     	return "details";
 
