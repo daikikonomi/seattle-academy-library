@@ -29,6 +29,8 @@ public class BookDetailsInfo {
     private String thumbnailUrl;
 
     private String thumbnailName;
+    
+    private int rentbookId;
 
     public BookDetailsInfo() {
 
@@ -36,7 +38,7 @@ public class BookDetailsInfo {
 
     //コンストラクタ
     public BookDetailsInfo(int bookId, String title, String author, String publisher, String publish_date, String isbn, String explanation,
-            String thumbnailUrl, String thumbnailName) {
+            String thumbnailUrl, String thumbnailName, int rentbookId) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
@@ -46,6 +48,7 @@ public class BookDetailsInfo {
         this.explanation = explanation;
         this.thumbnailUrl = thumbnailUrl;
         this.thumbnailName = thumbnailName;
+        this.rentbookId = rentbookId;
     }
 
 }

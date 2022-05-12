@@ -40,7 +40,9 @@ public class RentBookController {
     	int count2 = rentBookService.getRentBook();
     	
     	//本の存在チェック
+
     	if (count == count2) { 		
+
     		model.addAttribute("errorMessage","貸出し済みです" );	
     	}
     	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));

@@ -38,12 +38,12 @@ public class ReturnController {
 		int count = rentBookService.getRentBook();
     	rentBookService.returnBook(bookId);
     	int count2 = rentBookService.getRentBook();
+    	
 
     	//本の存在チェック
     	if (count == count2) {
     		model.addAttribute("errorMessage","貸出されていません" );
     	}
-
 	    model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 	    return "details";
 	 }

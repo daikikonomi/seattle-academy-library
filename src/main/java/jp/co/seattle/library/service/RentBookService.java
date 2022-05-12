@@ -22,6 +22,7 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
+
     //rentbooksテーブルから対象の本を削除（返却）
     public void returnBook(int bookId) {
 
@@ -29,7 +30,6 @@ public class RentBookService {
         
         jdbcTemplate.update(sql);
     }
-    
     
     //rentbooksテーブルから本を取得しカウントする
     public int getRentBook() {
