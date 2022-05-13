@@ -25,7 +25,15 @@ public class ReturnController {
 	@Autowired
     private RentBookService rentBookService;
 	
-	//返却機能の実装 
+	
+	/**
+	 * 返却機能の実装 
+	 * 
+	 * @param locale
+	 * @param bookId
+	 * @param model
+	 * @return
+	 */
 	@Transactional
 	@RequestMapping(value = "/returnBook", method = RequestMethod.POST)
 	public String returnBook

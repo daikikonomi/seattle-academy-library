@@ -26,8 +26,11 @@ public class RentBookService {
     }
     
 
-
-    //rentbooksテーブルから対象の本を削除（返却）
+    /**
+     * rentbooksテーブルから対象の本を削除（返却）
+     * 
+     * @param bookId
+     */
     public void returnBook(int bookId) {
 
         String sql = "delete from rentbooks where book_id = " + bookId ;
