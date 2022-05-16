@@ -1,7 +1,5 @@
 package jp.co.seattle.library.controller;
 
-
-
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -42,20 +40,17 @@ public class RentBookController {
     		@RequestParam("bookId") int bookId,
     		Model model) {
     	
-    	logger.info("Welcome delete! The client locale is {}.", locale);
-    	
-    	
+    	logger.info("Welcome rentBook! The client locale is {}.", locale);
+
     	int countBeforeRent = rentBookService.getRentBook();
     	rentBookService.rentBook(bookId);
     	int countAfterRent = rentBookService.getRentBook();
-    	
-    	//本の存在チェック
+
     	if (countBeforeRent == countAfterRent) {
     		
     		model.addAttribute("errorMessage","貸出し済みです" );
-    		
+
     	}
-    	
     	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
     	return "details";
 

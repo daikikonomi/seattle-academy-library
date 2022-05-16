@@ -25,11 +25,19 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
+
     /**
-     * rentbooksテーブルから本を取得しカウントする
+     * rentbooksテーブルから対象の本を削除（返却）
      * 
-     * @return jdbcTemplate.queryForObject
+     * @param bookId
      */
+    public void returnBook(int bookId) {
+
+        String sql = "delete from rentbooks where book_id = " + bookId ;
+        
+        jdbcTemplate.update(sql);
+    }
+    
     public int getRentBook() {
     	
     	String sql = "SELECT count (book_id) from rentBooks";
