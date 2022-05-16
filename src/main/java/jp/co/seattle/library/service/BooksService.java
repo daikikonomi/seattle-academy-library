@@ -37,6 +37,17 @@ public class BooksService {
 
         return getedBookList;
     }
+    
+    
+    public List<BookInfo> searchBookList(String searchedTitle) {
+
+        // TODO 取得したい情報を取得するようにSQLを修正
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "SELECT * FROM books left join rentbooks on books.id = rentBooks.book_id WHERE title like '%" + searchedTitle + "%'",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
 
     /**
      * 書籍IDに紐づく書籍詳細情報を取得する
