@@ -25,7 +25,14 @@ public class RentBookController {
 	@Autowired
     private RentBookService rentBookService;
 
-    //借りる機能の実装
+    /**
+     * 借りる機能の実装
+     * 
+     * @param locale
+     * @param bookId
+     * @param model
+     * @return 詳細画面
+     */
     @Transactional
     @RequestMapping(value = "/rentBook", method = RequestMethod.POST)
     public String rentBook
@@ -34,22 +41,19 @@ public class RentBookController {
     		Model model) {
     	
     	logger.info("Welcome rentBook! The client locale is {}.", locale);
-    	
-    	
-    	int count = rentBookService.getRentBook();
+
+    	int countBeforeRent = rentBookService.getRentBook();
     	rentBookService.rentBook(bookId);
-    	int count2 = rentBookService.getRentBook();
-    	
-    	//本の存在チェック
-    	if (count == count2) {
+    	int countAfterRent = rentBookService.getRentBook();
+
+    	if (countBeforeRent == countAfterRent) {
     		
     		model.addAttribute("errorMessage","貸出し済みです" );
-    		
+
     	}
-    	
     	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
     	return "details";
 
-    }
+    	}
 
 }

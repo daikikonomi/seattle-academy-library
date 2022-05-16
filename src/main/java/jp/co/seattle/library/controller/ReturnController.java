@@ -25,7 +25,15 @@ public class ReturnController {
 	@Autowired
     private RentBookService rentBookService;
 	
-	//返却機能の実装 
+	
+	/**
+	 * 返却機能の実装 
+	 * 
+	 * @param locale
+	 * @param bookId
+	 * @param model
+	 * @return
+	 */
 	@Transactional
 	@RequestMapping(value = "/returnBook", method = RequestMethod.POST)
 	public String returnBook
@@ -38,10 +46,9 @@ public class ReturnController {
 		int count = rentBookService.getRentBook();
     	rentBookService.returnBook(bookId);
     	int count2 = rentBookService.getRentBook();
-    	
+
     	//本の存在チェック
     	if (count == count2) {
-    		
     		model.addAttribute("errorMessage","貸出されていません" );
     	}
 
