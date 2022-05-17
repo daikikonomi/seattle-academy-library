@@ -45,12 +45,9 @@
                         <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
                     </a>
                 </div>
-                <c:if test="${bookDetailsInfo.rentbookId == 0}">
-                    <span>貸出可</span>
-                </c:if>
-                <c:if test="${bookDetailsInfo.rentbookId != 0}">
-                    <span>貸出中</span>
-                </c:if> 
+                <div>
+                    <p>${bookDetailsInfo.rentStatus}</p>
+                </div>
                 <c:if test="${!empty errorMessage}">
                     <div class="error"> 
                         <c:forEach var="errorMessage" items="${errorMessage}">

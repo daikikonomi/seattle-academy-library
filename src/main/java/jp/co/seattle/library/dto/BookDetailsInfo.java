@@ -30,7 +30,9 @@ public class BookDetailsInfo {
 
     private String thumbnailName;
     
-    private int rentbookId;
+    private int rentBookId; 
+    
+    private String rentStatus;
 
     public BookDetailsInfo() {
 
@@ -38,7 +40,7 @@ public class BookDetailsInfo {
 
     //コンストラクタ
     public BookDetailsInfo(int bookId, String title, String author, String publisher, String publish_date, String isbn, String explanation,
-            String thumbnailUrl, String thumbnailName, int rentbookId) {
+            String thumbnailUrl, String thumbnailName, int rentBookId, String rentStatus) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
@@ -48,7 +50,8 @@ public class BookDetailsInfo {
         this.explanation = explanation;
         this.thumbnailUrl = thumbnailUrl;
         this.thumbnailName = thumbnailName;
-        this.rentbookId = rentbookId;
+        this.rentBookId = rentBookId;
+        this.rentStatus = rentStatus;
     }
 
 }
