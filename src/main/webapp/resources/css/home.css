@@ -29,6 +29,13 @@ input {
     margin-right: 5px;
 }
 
+      
+.content-right {
+  display: flex;
+  justify-content: space-between; 
+}
+      
+
 .top-right li {
     display: inline-block;
     font-size: 16px;
@@ -64,6 +71,11 @@ input {
     color: white;
 }
 
+.searched_error{
+	text-align: center;
+	width: 150px;
+}
+
 /* ここから追加 */
 .search_box {
     position: relative;
@@ -71,7 +83,7 @@ input {
 }
 
 .search1 {
-    border-radius: 20px 0 0 20px;
+	border-radius: 0px;
     font-size: 15px;
     width: 325px;
     padding: 4px 10px;

@@ -26,6 +26,7 @@ public class RentBookService {
     }
     
 
+
     /**
      * rentbooksテーブルから対象の本を削除（返却）
      * 
@@ -38,6 +39,9 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
+
+
+    //rentbooksテーブルから本を取得しカウントする
     public int countRentBook() {
     	
     	String sql = "SELECT count (book_id) from rentBooks";

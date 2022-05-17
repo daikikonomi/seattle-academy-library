@@ -25,7 +25,13 @@
         </div>
     </header>
     <main>
+        <div class="content-right">
         <h1>Home</h1>
+            <form method="post" action="searchBook">
+                <input class="search1" id="search1:hover" type="search" name="searchedTitle">
+                <button type="submit">検索</button>
+            </form>
+        </div>
         <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a>
         <a href="<%=request.getContextPath()%>/bulkBooks" class="btn_bulk_book">一括登録</a>
         <div class="content_body">
@@ -56,6 +62,13 @@
                     </c:forEach>
                 </div>
             </div>
+        </div>
+        <div class="searched_error">
+            <c:if test="${empty bookList}">
+                <div class="error">
+                    <span>書籍がありません。</span>
+                </div>
+            </c:if>
         </div>
     </main>
 </body>

@@ -45,7 +45,9 @@
                         <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
                     </a>
                 </div>
-                
+                <div>
+                    <p>${bookDetailsInfo.rentStatus}</p>
+                </div>
                 <c:if test="${!empty errorMessage}">
                     <div class="error"> 
                         <c:forEach var="errorMessage" items="${errorMessage}">
@@ -53,8 +55,6 @@
                         </c:forEach>   
                     </div>
                 </c:if>
-                
-                
             </div>
             <div class="content_right">
                 <div>

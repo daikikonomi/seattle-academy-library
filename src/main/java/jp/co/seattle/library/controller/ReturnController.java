@@ -47,11 +47,11 @@ public class ReturnController {
     	rentBookService.returnBook(bookId);//対象の本をrentbooksテーブルから削除する(テーブル上に残るゴミを無くす)
     	int count2 = rentBookService.countRentBook();//再度rentbooksテーブルに登録されている本の数を取得
 
+
     	//本の存在チェック
     	if (count == count2) {
     		model.addAttribute("errorMessage","貸出されていません" );
     	}
-
 	    model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 	    return "details";
 	 }
