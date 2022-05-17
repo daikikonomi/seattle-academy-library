@@ -40,8 +40,9 @@ public class RentBookService {
     }
     
 
+
     //rentbooksテーブルから本を取得しカウントする
-    public int getRentBook() {
+    public int countRentBook() {
     	
     	String sql = "SELECT count (book_id) from rentBooks";
     	

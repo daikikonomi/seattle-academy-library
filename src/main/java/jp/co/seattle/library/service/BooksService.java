@@ -133,27 +133,4 @@ public class BooksService {
     	
     }
     
-    /**
-     * 書籍を編集する
-     * 
-     */
-    public void editbook(BookDetailsInfo bookInfo) {
-    	
-    	String sql = "UPDATE books" 
-    			+ "SET title = '" + bookInfo.getTitle() + "',"
-    			+ "author = '" + bookInfo.getAuthor() + "',"
-    			+ "publisher = '" + bookInfo.getPublisher() + "',"
-    			+ "publish_date = '" + bookInfo.getPublish_date() + "',"
-    			+ "explanation = '" + bookInfo.getPublish_date() + "',"
-    			+ "isbn = '" + bookInfo.getPublish_date() + "',"
-    			+ "thumbnail_url = '" + bookInfo.getPublish_date() + "',"
-    			+ "reg_date=now(),"
-    			+ "upd_date=now()"
-    			+ "where id = " + bookInfo.getBookId() ;
-    	
-    	jdbcTemplate.update(sql);
-    	
-    }
-    
-    
 }
