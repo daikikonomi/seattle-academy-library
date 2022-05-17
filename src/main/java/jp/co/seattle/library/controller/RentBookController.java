@@ -42,9 +42,9 @@ public class RentBookController {
     	
     	logger.info("Welcome rentBook! The client locale is {}.", locale);
 
-    	int countBeforeRent = rentBookService.getRentBook();
+    	int countBeforeRent = rentBookService.countRentBook();
     	rentBookService.rentBook(bookId);
-    	int countAfterRent = rentBookService.getRentBook();
+    	int countAfterRent = rentBookService.countRentBook();
 
     	if (countBeforeRent == countAfterRent) {
     		
