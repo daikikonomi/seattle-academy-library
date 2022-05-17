@@ -48,14 +48,15 @@ public class DeleteBookController {
             Model model) {
     	
     	logger.info("Welcome delete! The client locale is {}.", locale);
-    		
-    	int countBeforeRent = rentBookService.getRentBook();
-    	rentBookService.returnBook(bookId);
-    	int countAfterRent = rentBookService.getRentBook();
     	
     	
-    	//本の存在チェック
-    	if (countBeforeRent < countAfterRent) {   
+    	int countBeforeRent = rentBookService.countRentBook();//rentbooksテーブル登録されている本の数を取得
+    	rentBookService.returnBook(bookId);//対象の本をrentbooksテーブルから削除する(テーブル上に残るゴミを無くす)
+    	int countAfterRent = rentBookService.countRentBook();//再度rentbooksテーブル登録されている本の数を取得
+    	
+    	
+    	//本の存在チェック(借りる前と借りた後のほんの数が一緒であれば、貸出はされていない)
+    	if (countBeforeRent == countAfterRent) {   
     		booksService.deleteBook(bookId);
     		model.addAttribute("bookList", booksService.getBookList());
         	return "home";

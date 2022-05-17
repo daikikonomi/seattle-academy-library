@@ -38,7 +38,7 @@ public class RentBookService {
         jdbcTemplate.update(sql);
     }
     
-    public int getRentBook() {
+    public int countRentBook() {
     	
     	String sql = "SELECT count (book_id) from rentBooks";
     	

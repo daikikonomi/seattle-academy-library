@@ -43,9 +43,9 @@ public class ReturnController {
 		 
 		logger.info("Welcome returnBook! The client locale is {}.", locale);
 		
-		int count = rentBookService.getRentBook();
-    	rentBookService.returnBook(bookId);
-    	int count2 = rentBookService.getRentBook();
+		int count = rentBookService.countRentBook();//rentbooksテーブルに登録されている本の数を取得
+    	rentBookService.returnBook(bookId);//対象の本をrentbooksテーブルから削除する(テーブル上に残るゴミを無くす)
+    	int count2 = rentBookService.countRentBook();//再度rentbooksテーブルに登録されている本の数を取得
 
     	//本の存在チェック
     	if (count == count2) {
