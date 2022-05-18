@@ -28,7 +28,9 @@
         <div class="content-right">
         <h1>Home</h1>
             <form method="post" action="searchBook">
-                <input class="search1" id="search1:hover" type="search" name="searchedTitle">
+                <input type="radio" name="radiobtn" value="searchedKeyword">キーワードで検索
+                <input type="radio" name="radiobtn" value="searchedTitle">書籍名で検索<br>
+                <input class="search1" id="search1:hover" type="search" name="searchbook">
                 <button type="submit">検索</button>
             </form>
         </div>
@@ -62,8 +64,6 @@
                     </c:forEach>
                 </div>
             </div>
-        </div>
-        <div class="searched_error">
             <c:if test="${empty bookList}">
                 <div class="error">
                     <span>書籍がありません。</span>

@@ -39,11 +39,33 @@ public class BooksService {
     }
     
     
-    public List<BookInfo> searchBookList(String searchedTitle) {
+    /**
+     * キーワードで検索(完全一致)
+     * 
+     * @param searchedKeyword
+     * @return
+     */
+    public List<BookInfo> searchBookByKeyword(String searchbook) {
 
         // TODO 取得したい情報を取得するようにSQLを修正
         List<BookInfo> searchedBookList = jdbcTemplate.query(
-                "SELECT * FROM books left join rentbooks on books.id = rentBooks.book_id WHERE title like '%" + searchedTitle + "%'",
+                "SELECT * FROM books left join rentbooks on books.id = rentBooks.book_id WHERE title like '%" + searchbook + "%'",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+    
+    /**
+     * 書籍名で検索(完全一致)
+     * 
+     * @param searchedTitle
+     * @return
+     */
+    public List<BookInfo> searchBookByTitle(String searchbook) {
+
+        // TODO 取得したい情報を取得するようにSQLを修正
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+        		"select * FROM books left join rentbooks on books.id = rentBooks.book_id WHERE title = '"+ searchbook +"'",
                 new BookInfoRowMapper());
 
         return searchedBookList;
