@@ -59,7 +59,7 @@ public class AddBooksController {
             @RequestParam("publisher") String publisher,         
             @RequestParam("publish_date") String publish_date,
             @RequestParam("explanation") String explanation,
-            @RequestParam("isbn") String isbn,          
+            @RequestParam("isbn") String isbn, 
             @RequestParam("thumbnail") MultipartFile file,
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);

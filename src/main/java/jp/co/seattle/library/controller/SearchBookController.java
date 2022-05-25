@@ -2,6 +2,8 @@ package jp.co.seattle.library.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +29,26 @@ public class SearchBookController {
 	 * @return　書籍一覧画面
 	 */
 	@RequestMapping(value = "/searchBook", method = RequestMethod.POST)
-    public String searchBook(Locale locale, Model model, String searchedTitle) {
+    public String searchBook(Locale locale, Model model,HttpServletRequest request, 
+    		String searchbook) {
 		
 		// デバッグ用ログ
         logger.info("Welcome createAccount! The client locale is {}.", locale);
-
-		model.addAttribute("bookList", booksService.searchBookList(searchedTitle));
+        
+       
+        String HowToSearch = request.getParameter("radiobtn");
+        
+        // 検索方式によって実行するSQLを変える
+        if(HowToSearch.equals("searchedKeyword")) {
+        	model.addAttribute("bookList", booksService.searchBookByKeyword(searchbook));
+        }
+        else {
+        	model.addAttribute("bookList", booksService.searchBookByTitle(searchbook));
+        }
+        	
 		return "home";
 	}
+
 
 	
 	

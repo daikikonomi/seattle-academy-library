@@ -73,7 +73,7 @@ input {
 
 .searched_error{
 	text-align: center;
-	width: 150px;
+	width: 350px;
 }
 
 /* ここから追加 */
@@ -152,7 +152,7 @@ img.book_noimg, img.book_img{
     font-size: 12px;
 }
 
-a.btn_add_book,a.btn_bulk_book, button.btn_addBook,button.btn_editBook, button.btn_deleteBook,button.btn_rentBook,button.btn_returnBook,button.btn_bulkRegist {
+a.btn_add_book,a.btn_bulk_book, button.btn_addBook,button.btn_editBook, button.btn_deleteBook,button.btn_rentBook,button.btn_returnBook,button.btn_bulkRegist,a.btn_rentHistory {
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
@@ -182,6 +182,9 @@ button.btn_returnBook {
     background-color: #7db4e6;
 }
 button.btn_bulkRegist {
+	background-color: #FF9966;
+}
+a.btn_rentHistory {
 	background-color: #FF9966;
 }
 
@@ -227,7 +230,7 @@ a:hover, button:hover {
     justify-content: center;
 }
 .button.btn_bulkRegist{
-	    display: flex;
+	display: flex;
     justify-content: center;
 }
 
