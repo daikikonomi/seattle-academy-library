@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.co.seattle.library.dto.CirculationHistoryInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.RentBookService;
 
@@ -33,24 +34,35 @@ public class RentBookController {
      * @param model
      * @return 詳細画面
      */
-    @Transactional
+	@Transactional
     @RequestMapping(value = "/rentBook", method = RequestMethod.POST)
     public String rentBook
     		(Locale locale,
     		@RequestParam("bookId") int bookId,
+    		//@RequestParam("title") String title,
+    		//@RequestParam("rentDate") String rentDate,
+    		//@RequestParam("returnDate") String returnDate,
     		Model model) {
     	
     	logger.info("Welcome rentBook! The client locale is {}.", locale);
 
-    	int countBeforeRent = rentBookService.countRentBook();
-    	rentBookService.rentBook(bookId);
-    	int countAfterRent = rentBookService.countRentBook();
 
-    	if (countBeforeRent == countAfterRent) {
-    		
-    		model.addAttribute("errorMessage","貸出し済みです" );
-
+    	
+    	CirculationHistoryInfo CirculationHistoryInfo = rentBookService.selectRentHistoryInfo(bookId);
+    	
+    	
+    	if (CirculationHistoryInfo == null) {
+    		rentBookService.rentBook(bookId);
     	}
+    	else {
+    		if(CirculationHistoryInfo.getRentDate() == null) {
+    			rentBookService.updateStatus(bookId);
+    		}
+    		else {
+    			model.addAttribute("errorMessage","貸出し済みです" );
+    		}
+    	}
+    	
     	model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
     	return "details";
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.co.seattle.library.dto.CirculationHistoryInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.RentBookService;
 
@@ -50,23 +51,29 @@ public class DeleteBookController {
     	logger.info("Welcome delete! The client locale is {}.", locale);
     	
     	
-    	int countBeforeRent = rentBookService.countRentBook();//rentbooksテーブル登録されている本の数を取得
-    	rentBookService.returnBook(bookId);//対象の本をrentbooksテーブルから削除する(テーブル上に残るゴミを無くす)
-    	int countAfterRent = rentBookService.countRentBook();//再度rentbooksテーブル登録されている本の数を取得
-    	
-    	
-    	//本の存在チェック(借りる前と借りた後のほんの数が一緒であれば、貸出はされていない)
-    	if (countBeforeRent == countAfterRent) {   
-    		booksService.deleteBook(bookId);
+		CirculationHistoryInfo CirculationHistoryInfo = rentBookService.selectRentHistoryInfo(bookId);
+
+    	//rentBooksテーブルに指定された書籍が存在するか確認
+    	if (CirculationHistoryInfo == null) {
+    	    booksService.deleteBook(bookId);
     		model.addAttribute("bookList", booksService.getBookList());
-        	return "home";
+    		return "home";
     	}
-    	else {	
-        	model.addAttribute("errorMessage","貸出し中の書籍です" );	
-    		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-    		return "details";
+    	else {
+    		if(CirculationHistoryInfo.getRentDate() == null ) {
+    			booksService.deleteBook(bookId);
+        		model.addAttribute("bookList", booksService.getBookList());
+        		return "home";
+			}
+    		else {
+    			model.addAttribute("errorMessage","貸出し中の書籍です" );	
+    			model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+    			return "details";
+			}
+    		
     	}
 
-    }
 
+	}
+	
 }

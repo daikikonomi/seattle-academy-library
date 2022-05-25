@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.co.seattle.library.dto.CirculationHistoryInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.RentBookService;
 
@@ -39,19 +40,29 @@ public class ReturnController {
 	public String returnBook
 		(Locale locale,
 		@RequestParam("bookId") int bookId,
+		//@RequestParam("returnDate") String returnDate,
 		Model model) {
 		 
 		logger.info("Welcome returnBook! The client locale is {}.", locale);
 		
-		int count = rentBookService.countRentBook();//rentbooksテーブルに登録されている本の数を取得
-    	rentBookService.returnBook(bookId);//対象の本をrentbooksテーブルから削除する(テーブル上に残るゴミを無くす)
-    	int count2 = rentBookService.countRentBook();//再度rentbooksテーブルに登録されている本の数を取得
 
+		
+		CirculationHistoryInfo CirculationHistoryInfo = rentBookService.selectRentHistoryInfo(bookId);
 
-    	//本の存在チェック
-    	if (count == count2) {
+    	//rentBooksテーブルに指定された書籍が存在するか確認
+    	if (CirculationHistoryInfo == null) {
     		model.addAttribute("errorMessage","貸出されていません" );
     	}
+    	else {
+    		if(CirculationHistoryInfo.getRentDate() == null ) {
+    			model.addAttribute("errorMessage","貸出されていません" );
+			}
+    		else {
+				rentBookService.returnBook(bookId);
+			}
+    		
+    	}
+    	
 	    model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 	    return "details";
 	 }

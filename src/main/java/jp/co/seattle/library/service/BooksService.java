@@ -80,7 +80,7 @@ public class BooksService {
     public BookDetailsInfo getBookInfo(int bookId) {
 
         // JSPに渡すデータを設定する
-        String sql = "SELECT *, CASE WHEN book_id is null THEN '貸出可' ELSE '貸出中' END from books left join rentbooks on books.id = rentBooks.book_id where books.id = " + bookId;
+        String sql = "SELECT *, CASE WHEN rent_date is null THEN '貸出可' ELSE '貸出中' END from books left join rentbooks on books.id = rentBooks.book_id where books.id = " + bookId;
 
         BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
 
@@ -95,7 +95,7 @@ public class BooksService {
     public BookDetailsInfo getLatestBookInfo() {
 
      
-    	String sql = "SELECT *, CASE WHEN book_id is null THEN '貸出可' ELSE '貸出中' END from books left join rentbooks on books.id = rentBooks.book_id where id = (select max (id) from books);";
+    	String sql = "SELECT *, CASE WHEN rent_date is null THEN '貸出可' ELSE '貸出中' END from books left join rentbooks on books.id = rentBooks.book_id where books.id = (select max (id) from books);";
                 
 
         BookDetailsInfo latestBookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
@@ -132,12 +132,9 @@ public class BooksService {
      */
     public void deleteBook(int bookId) {
     	
-    	String sql = "delete from books where id = " + bookId + ";";
+    	String sql = "WITH books AS (DELETE FROM books where id = " + bookId+ " ) DELETE FROM rentBooks where book_id = " + bookId;
     	jdbcTemplate.update(sql);
     	
-    	
-    	
-
     }
     
 
